@@ -30,9 +30,13 @@ class LogisticRegression:
         old_theta = self.theta
         new_theta = _next_theta(self.theta, x, y)
 
+        n_iter = 0
         while np.linalg.norm(old_theta - new_theta, 1) >= self.eps:
             old_theta = new_theta
             new_theta = _next_theta(old_theta, x, y)
+            n_iter += 1
+            if n_iter == self.max_iter:
+                break
 
         self.theta = new_theta
         print(self.theta)
