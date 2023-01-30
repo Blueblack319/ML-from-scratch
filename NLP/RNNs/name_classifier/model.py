@@ -23,4 +23,22 @@ class RNNFromScratch(nn.Module):
     def initHidden(self):
         return torch.zeros(1, self.hidden_size)
 
-class RNN
+
+class RNNUsingModule(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(RNNUsingModule, self).__init__()
+        self.hidden_size = hidden_size
+        self.rnn = nn.RNN(input_size, hidden_size, batch_first=True)
+        self.fc = nn.Linear(hidden_size, output_size)
+        self.bias = nn.Parameter(torch.ones([output_size]))
+
+    def forward(self, input, hidden):
+        # input = input.transpose(0, 1)
+        output, _ = self.rnn(input, hidden)
+        output = output[:, -1, :]
+        output = self.fc(output) + self.bias
+        return output
+
+    def initHidden(self):
+        return torch.zeros([1, 1, self.hidden_size])
+        
