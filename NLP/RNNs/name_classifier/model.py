@@ -23,6 +23,12 @@ class RNNFromScratch(nn.Module):
     def initHidden(self):
         return torch.zeros(1, self.hidden_size)
 
+class RNNFromScratchMultiLayer(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size, layer_size):
+        super(RNNFromScratchMultiLayer, self).__init__()
+        z
+
+
 
 class RNNUsingModule(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -33,7 +39,6 @@ class RNNUsingModule(nn.Module):
         self.bias = nn.Parameter(torch.ones([output_size]))
 
     def forward(self, input, hidden):
-        # input = input.transpose(0, 1)
         output, _ = self.rnn(input, hidden)
         output = output[:, -1, :]
         output = self.fc(output) + self.bias
