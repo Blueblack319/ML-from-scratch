@@ -26,7 +26,7 @@ class RNNFromScratch(nn.Module):
 class RNNFromScratchMultiLayer(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, layer_size):
         super(RNNFromScratchMultiLayer, self).__init__()
-        z
+        pass
 
 
 
